@@ -11,7 +11,7 @@ An Android app containing a collection of useful tools for Hypixel SkyBlock
 - **Calender**        - showing upcoming events in the next 48 hours in two columns
 - **Notifications**   - for next Dark Auction and other important events like Spooky Festival, etc.
 - **Bazaar**          - list of all items and prices sorted by category name
-- **AH Price Lookup** - search through all ah items names and lore using space seperated keywords; double quotes for grouping
+- **AH Price Lookup** - search through all ah items names and lore using space separated keywords; double quotes for grouping
 - **Settings**        - API key, personal user name and an option to limit the ah page requests to 10 instead of the full 70
 
 ## First Steps
