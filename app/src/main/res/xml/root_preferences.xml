@@ -1,0 +1,28 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory android:title="Essential">
+
+        <EditTextPreference
+            android:icon="@drawable/ic_baseline_vpn_key_24"
+            android:key="api_key_preference"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="API Key" />
+        <EditTextPreference
+            android:icon="@drawable/ic_baseline_person_24"
+            android:key="name_preference"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Minecraft User Name" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Optional">
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:icon="@drawable/ic_baseline_insert_drive_file_24"
+            android:key="limit_page_requests"
+            android:title="Limit AH Page Requests" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
