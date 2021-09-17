@@ -115,18 +115,19 @@ public class ProfileFragment extends UpdatableFragment {
         sb.append("Skill Average:\n  ");
         try {
             double skill_avg = 0;
-            skill_avg += getLevel(normal_ladder, getDoubleByPath("experience_skill_farming", true));
-            skill_avg += getLevel(normal_ladder, getDoubleByPath("experience_skill_mining", true));
-            skill_avg += getLevel(normal_ladder, getDoubleByPath("experience_skill_combat", true));
-            skill_avg += getLevel(normal_ladder, getDoubleByPath("experience_skill_foraging", true));
-            skill_avg += getLevel(normal_ladder, getDoubleByPath("experience_skill_fishing", true));
-            skill_avg += getLevel(normal_ladder, getDoubleByPath("experience_skill_enchanting", true));
-            skill_avg += getLevel(normal_ladder, getDoubleByPath("experience_skill_alchemy", true));
-            skill_avg += getLevel(normal_ladder, getDoubleByPath("experience_skill_taming", true));
-            double cata_skill = getLevel(catacombs_ladder, getDoubleByPath("dungeons.dungeon_types.catacombs.experience", true));
+            skill_avg += getLevel(normal_ladder, getDoubleByPath("experience_skill_farming", false));
+            skill_avg += getLevel(normal_ladder, getDoubleByPath("experience_skill_mining", false));
+            skill_avg += getLevel(normal_ladder, getDoubleByPath("experience_skill_combat", false));
+            skill_avg += getLevel(normal_ladder, getDoubleByPath("experience_skill_foraging", false));
+            skill_avg += getLevel(normal_ladder, getDoubleByPath("experience_skill_fishing", false));
+            skill_avg += getLevel(normal_ladder, getDoubleByPath("experience_skill_enchanting", false));
+            skill_avg += getLevel(normal_ladder, getDoubleByPath("experience_skill_alchemy", false));
+            skill_avg += getLevel(normal_ladder, getDoubleByPath("experience_skill_taming", false));
+            double cata_skill = getLevel(catacombs_ladder, getDoubleByPath("dungeons.dungeon_types.catacombs.experience", false));
             // skill_avg += cata_skill;
+            boolean skillAvgExists = skill_avg > 0;
             skill_avg /= 8.0;
-            sb.append(String.format("%s (excl. Catacombs %s)\n", round(skill_avg), round(cata_skill)));
+            sb.append(String.format("%s (excl. Catacombs %s)\n", skillAvgExists ? round(skill_avg) : errorMessage, round(cata_skill)));
         } catch (JSONException e) {
             sb.append(errorMessage);
         }
