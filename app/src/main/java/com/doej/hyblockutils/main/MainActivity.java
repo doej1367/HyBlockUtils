@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
             };
             getOnBackPressedDispatcher().addCallback(this, callback);
         }
+        // TODO automatically switch to settings on missing api key?
     }
 
     @Override

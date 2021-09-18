@@ -43,8 +43,8 @@ public class ApiRequest {
         }
     }
 
-    public JSONObject getProfile(String name) {
-        return getJsonObjectFromApi("https://api.hypixel.net/skyblock/profiles?key=" + apiKey + "&uuid=" + getUUID(name));
+    public JSONObject getProfile(String uuid) {
+        return getJsonObjectFromApi("https://api.hypixel.net/skyblock/profiles?key=" + apiKey + "&uuid=" + uuid);
     }
 
     public JSONObject getAuctionsPage(int page) {

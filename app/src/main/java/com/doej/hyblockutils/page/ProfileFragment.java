@@ -221,6 +221,7 @@ public class ProfileFragment extends UpdatableFragment {
         return Math.round(skill_avg * 10) / 10.0;
     }
 
+    @SuppressWarnings("SameParameterValue")
     private double getDoubleByPath(String path, boolean throwError) throws JSONException {
         try {
             JSONObject o = currentProfile;
@@ -256,7 +257,7 @@ public class ProfileFragment extends UpdatableFragment {
             progressBar.setProgress(1);
             uuid = new ApiRequest().getUUID(MainActivity.getName());
             progressBar.setProgress(2);
-            JSONObject o = new ApiRequest().getProfile(MainActivity.getName());
+            JSONObject o = new ApiRequest().getProfile(uuid);
             if (!o.getBoolean("success") && o.getString("cause").contains("Invalid API key"))
                 return Status.INVALID_KEY;
             profiles = o.getJSONArray("profiles");

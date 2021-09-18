@@ -19,7 +19,7 @@ public class ProfileSearchFragment extends ProfileFragment {
             progressBar.setProgress(1);
             uuid = new ApiRequest().getUUID(queryWords.get(0));
             progressBar.setProgress(2);
-            JSONObject o = new ApiRequest().getProfile(queryWords.get(0));
+            JSONObject o = new ApiRequest().getProfile(uuid);
             if (!o.getBoolean("success") && o.getString("cause").contains("Invalid API key"))
                 return Status.INVALID_KEY;
             profiles = o.getJSONArray("profiles");
