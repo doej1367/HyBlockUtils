@@ -23,6 +23,7 @@ An Android app containing a collection of useful tools for Hypixel SkyBlock
 ## Requirements
 - Most versions of Android (API level 16 and higher)
     - tested with API level 16-emulated (Jelly Bean 4.1), 17-emulated (Jelly Bean 4.2), 22-emulated (Lollipop 5.1), 23-physical (Marshmallow 6.0), 25-emulated (Nougat 7.1) and 30-physical (Android 11)
+- ca. 150 MB of RAM (maximum usage for an empty ah query -> all ah items in memory)
 
 ## Credits
 TheNullicorn - for this amazing NBT parsing lib https://github.com/TheNullicorn/Nedit
