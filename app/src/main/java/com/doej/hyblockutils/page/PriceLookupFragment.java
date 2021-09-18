@@ -23,8 +23,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Locale;
 
+import androidx.collection.CircularArray;
+
 /**
- *
  * @author doej1367
  */
 public class PriceLookupFragment extends UpdatableFragment {
@@ -94,16 +95,16 @@ public class PriceLookupFragment extends UpdatableFragment {
     /**
      * Sends up to 4 parallel requests to get, parse and filter the data from auction house pages
      *
-     * @param pages - the page numbers from 1 to <code>pages</code> to get
+     * @param pages       - the page numbers from 1 to <code>pages</code> to get
      * @param progressBar - the progress bar that gets updated while the pages are requested
      * @throws InterruptedException - thrown in case some of the threads are interrupted
      */
     private void addPages(int pages, ProgressBar progressBar) throws InterruptedException {
-        Thread[] requestThreads = new Thread[pages - 1];
         int threadCount = Math.min(pages - 1, 4);
+        CircularArray<Thread> requestThreads = new CircularArray<>(threadCount);
         for (int i = 1; i < pages; i++) {
             int finalI = i;
-            requestThreads[i - 1] = new Thread() {
+            requestThreads.addFirst(new Thread() {
                 @Override
                 public void run() {
                     try {
@@ -112,14 +113,14 @@ public class PriceLookupFragment extends UpdatableFragment {
 
                     }
                 }
-            };
-            requestThreads[i - 1].start();
+            });
+            requestThreads.getFirst().start();
             progressBar.setProgress(i);
-            if (i > threadCount)
-                requestThreads[i - threadCount - 1].join();
+            if (requestThreads.size() >= threadCount)
+                requestThreads.popLast().join();
         }
-        for (int i = pages - threadCount; i < pages; i++)
-            requestThreads[i - 1].join();
+        while (requestThreads.size() > 0)
+            requestThreads.popLast().join();
     }
 
     /**
