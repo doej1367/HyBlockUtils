@@ -1,13 +1,12 @@
 package com.doej.hyblockutils.nedit;
 
+import android.util.Base64;
+
+import com.doej.hyblockutils.nedit.type.NBTCompound;
+
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import android.util.Base64;
-import com.doej.hyblockutils.nedit.type.NBTCompound;
 
 /**
  * A utility class for reading NBT data from various sources

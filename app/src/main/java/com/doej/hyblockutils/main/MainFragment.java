@@ -59,11 +59,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
-
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {

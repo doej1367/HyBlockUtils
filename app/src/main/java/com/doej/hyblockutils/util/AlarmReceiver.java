@@ -1,5 +1,6 @@
 package com.doej.hyblockutils.util;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -8,10 +9,8 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 
-import com.doej.hyblockutils.main.MainActivity;
 import com.doej.hyblockutils.R;
-
-import androidx.core.app.NotificationCompat;
+import com.doej.hyblockutils.main.MainActivity;
 
 /**
  *
@@ -22,7 +21,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
+        Notification.Builder builder = new Notification.Builder(context)
                 .setSmallIcon(R.drawable.ic_baseline_calendar_today_64)
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher))
                 .setContentTitle(intent.getStringExtra("title"))
@@ -30,7 +29,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setOnlyAlertOnce(true)
                 .setOngoing(false)
                 .setAutoCancel(true)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setPriority(Notification.PRIORITY_DEFAULT)
                 .setLights(0xFFb71c1c, 1000, 2000)
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                 .setContentIntent(PendingIntent.getActivity(context, 0, new Intent(context, MainActivity.class), PendingIntent.FLAG_ONE_SHOT));
