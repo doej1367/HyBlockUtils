@@ -17,12 +17,21 @@ An Android app containing a collection of useful tools for Hypixel SkyBlock
 ## First Steps
 1. **API Key**            - look up your hypixel api key or enter `/api` in-game to create a new one
 2. **API Settings**       - go to the gear icon in the top right corner and enter your API key
-3. **User Name Setting**  - go to the gear icon in the top right corner and enter your or any other user name (for the quick access)
+3. **User Name Setting**  - go to the gear icon in the top right corner and enter your or any other user name (used for the personal Profile Viewer)
 4. Done
 
 ## Requirements
-- Most versions of Android (API level 16 and higher)
+- Most versions of Android will work (API level 16 and higher)
     - tested with API level 16-emulated (Jelly Bean 4.1), 17-emulated (Jelly Bean 4.2), 22-emulated (Lollipop 5.1), 23-physical (Marshmallow 6.0), 25-emulated (Nougat 7.1) and 30-physical (Android 11)
+- Internet connection
+    - the faster the better (more speed = less waiting for all the api requests)
+    - **preferably use W-Lan for the fully enabled ah feature** (70 ah pages are about 120 MB of data volume)
+- About 150 MB of RAM
+    - maximum usage for an empty ah query -> all ah items in memory (about 70,000 items)
+- Touch screen
+    - the bigger the more you see and the less you need to scroll
+- CPU
+    - again - the faster the better (more speed = less waiting for data preperation and screen updates)
 
 ## Credits
 TheNullicorn - for this amazing NBT parsing lib https://github.com/TheNullicorn/Nedit
