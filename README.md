@@ -34,7 +34,7 @@ An Android app containing a collection of useful tools for Hypixel SkyBlock
     - tested with 320x480, 480x800, 720x1280 and 1080x1920
     - the bigger the more you see and the less you need to scroll
 - CPU
-    - tested with octa-core 1.3 GHz prozessor (among others)
+    - tested with quad-core 1.3 GHz prozessor (among others)
     - again - the faster the better (more speed = less waiting for data preperation and screen updates)
 
 ## Credits
