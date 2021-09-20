@@ -16,9 +16,10 @@ An Android app containing a collection of useful tools for Hypixel SkyBlock
 
 ## First Steps
 1. **API Key**            - look up your hypixel api key or enter `/api` in-game to create a new one
-2. **API Settings**       - go to the gear icon in the top right corner and enter your API key
-3. **User Name Setting**  - go to the gear icon in the top right corner and enter your or any other user name (used for the personal Profile Viewer)
-4. Done
+    - in case your android device gets stolen or you've entered the key on a rooted device (on which the internal storage is insecure to use) I recommend generating a new api key to render your old one invalid
+3. **API Settings**       - go to the gear icon in the top right corner and enter your API key
+4. **User Name Setting**  - go to the gear icon in the top right corner and enter your or any other user name (used for the personal Profile Viewer)
+5. Done
 
 ## Requirements
 - Most versions of Android will work (API level 16 and higher)
