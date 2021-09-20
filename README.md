@@ -29,10 +29,12 @@ An Android app containing a collection of useful tools for Hypixel SkyBlock
     - **preferably use W-Lan for the fully enabled ah feature** (70 ah pages are about 120 MB of data volume)
 - About 150 MB of RAM
     - maximum usage for an empty ah query -> all ah items in memory (about 70,000 items)
+- About 10 MB of internal memory (ROM)
 - Touch screen
     - tested with 320x480, 480x800, 720x1280 and 1080x1920
     - the bigger the more you see and the less you need to scroll
 - CPU
+    - tested with octa-core 1.3 GHz prozessor (among others)
     - again - the faster the better (more speed = less waiting for data preperation and screen updates)
 
 ## Credits
