@@ -36,4 +36,4 @@ An Android app containing a collection of useful tools for Hypixel SkyBlock
     - again - the faster the better (more speed = less waiting for data preperation and screen updates)
 
 ## Credits
-TheNullicorn - for this amazing NBT parsing lib https://github.com/TheNullicorn/Nedit
+- TheNullicorn - for this amazing NBT parsing lib https://github.com/TheNullicorn/Nedit
