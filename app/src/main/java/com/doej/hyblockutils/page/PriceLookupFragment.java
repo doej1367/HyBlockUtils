@@ -78,7 +78,7 @@ public class PriceLookupFragment extends UpdatableFragment {
             boolean noResults = true;
             for (int i = 0; i < Math.min(auctionItems.size(), maxResultCount); i++) {
                 AuctionItem a = auctionItems.get(i);
-                sb.append(String.format("%s\n  %s - %s%s\n", a.getItemName(), new ApiRequest().getName(a.getAuctioneer()), formatLong(a.getPrice()), (a.isBin() ? " (BIN)" : "")));
+                sb.append(String.format("%s\n  %s - %s%s\n", a.getItemName(), new ApiRequest().getName(a.getAuctioneer()), formatLong(a.getPrice()), (a.isBin() ? " (BIN)" : " (AH)")));
                 noResults = false;
                 progressBar.setProgress(pages + i);
             }
@@ -134,7 +134,7 @@ public class PriceLookupFragment extends UpdatableFragment {
         JSONArray array = o.getJSONArray("auctions");
         for (int i = 0; i < array.length(); i++) {
             AuctionItem a = new AuctionItem(array.getJSONObject(i));
-            if (a.contains(queryWords))
+            if (a.contains(queryWords) && a.isBin()) // TODO add setting for "bin only"?
                 auctionItems.add(a);
         }
     }
