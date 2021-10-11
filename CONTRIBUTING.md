@@ -16,6 +16,6 @@
 6. Select an Android device (physical or emulated) with an api level of 16 or higher
     - create an emulated one with the AVD manager if you don't have one
 7. Now you can change files and test the app (don't forget to enter the api key in the settings of the app)
-8. Once you are you are happy with your result you can comit and push everything to a new branch of your forked project
+8. Once you are you are happy with your result you can commit and push everything to a new branch of your forked project
 9. If you want to create a pull request you can do that on the github page of your forked project
     - github automatically offers you that option once you've made changes to your forked project
