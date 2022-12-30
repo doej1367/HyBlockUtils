@@ -16,7 +16,6 @@ import java.security.NoSuchAlgorithmException;
 import javax.net.ssl.HttpsURLConnection;
 
 /**
- *
  * @author doej1367
  */
 public class ApiRequest {
@@ -28,7 +27,8 @@ public class ApiRequest {
 
     public String getUUID(String name) {
         try {
-            return getJsonObjectFromApi("https://api.mojang.com/users/profiles/minecraft/" + name).getString("id");
+            return getJsonObjectFromApi("https://playerdb.co/api/player/minecraft/" + name)
+                    .getJSONObject("data").getJSONObject("player").getString("raw_id");
         } catch (JSONException e) {
             return "<error>";
         }
@@ -36,8 +36,8 @@ public class ApiRequest {
 
     public String getName(String uuid) {
         try {
-            JSONArray tmp = getJsonArrayFromApi("https://api.mojang.com/user/profiles/" + uuid + "/names");
-            return tmp.getJSONObject(tmp.length() - 1).getString("name");
+            JSONObject tmp = getJsonObjectFromApi("https://playerdb.co/api/player/minecraft/" + uuid);
+            return tmp.getJSONObject("data").getJSONObject("player").getString("username");
         } catch (JSONException e) {
             return "<error>";
         }
