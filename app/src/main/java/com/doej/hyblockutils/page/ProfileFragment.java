@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.doej.hyblockutils.R;
 import com.doej.hyblockutils.item.InventoryItem;
+import com.doej.hyblockutils.item.SkyblockProfile;
 import com.doej.hyblockutils.main.MainActivity;
 import com.doej.hyblockutils.nedit.NBTReader;
 import com.doej.hyblockutils.util.ApiRequest;
@@ -22,10 +23,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 /**
- *
  * @author doej1367
  */
 public class ProfileFragment extends UpdatableFragment {
@@ -53,35 +58,33 @@ public class ProfileFragment extends UpdatableFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        String[] profile_names = new String[profiles.length()];
-        int mostRecentProfile = 0;
-        long mostRecentProfileAge = Long.MAX_VALUE;
-        for (int i = 0; i < profile_names.length; i++) {
+        SortedMap<Long, SkyblockProfile> ageProfileTitlePairs = new TreeMap<>();
+        for (int i = 0; i < profiles.length(); i++) {
             try {
-                long lastSaveAge = System.currentTimeMillis() - profiles.getJSONObject(i).getJSONObject("members")
-                        .getJSONObject(uuid).getLong("last_save");
-                if (lastSaveAge < mostRecentProfileAge) {
-                    mostRecentProfileAge = lastSaveAge;
-                    mostRecentProfile = i;
-                }
-                profile_names[i] = profiles.getJSONObject(i).getString("cute_name") +
-                        " (" + round((lastSaveAge) / (1000.0 * 60 * 60 * 24)) + " d ago)";
+                long profileJoinedDate = System.currentTimeMillis() - profiles.getJSONObject(i).getJSONObject("members")
+                        .getJSONObject(uuid).getLong("first_join");
+                String profile_title = profiles.getJSONObject(i).getString("cute_name") +
+                        " (created " + round((profileJoinedDate) / (1000.0 * 60 * 60 * 24 * 365.242189)) + " y ago)";
+                ageProfileTitlePairs.put(profileJoinedDate, new SkyblockProfile(i, profile_title));
             } catch (JSONException e) {
                 e.printStackTrace();
-                profile_names[i] = "";
+                ageProfileTitlePairs.put(Long.MIN_VALUE, new SkyblockProfile(i, ""));
             }
         }
         Spinner dropdown = view.findViewById(R.id.profileSelect);
         TextView output = view.findViewById(R.id.profileOutput);
         output.setMovementMethod(new ScrollingMovementMethod());
         output.setTextSize(getTextSize());
-        dropdown.setAdapter(new ArrayAdapter<>(getContext(), R.layout.spinner_item, profile_names));
-        dropdown.setSelection(mostRecentProfile);
+        List<SkyblockProfile> profile_titles = new ArrayList<>();
+        profile_titles.addAll(ageProfileTitlePairs.values());
+        Collections.reverse(profile_titles);
+        dropdown.setAdapter(new ArrayAdapter<>(getContext(), R.layout.spinner_item, profile_titles));
+        dropdown.setSelection(0);
         dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 try {
-                    currentProfile = profiles.getJSONObject(i).getJSONObject("members").getJSONObject(uuid);
+                    currentProfile = profiles.getJSONObject(profile_titles.get(i).getId()).getJSONObject("members").getJSONObject(uuid);
                     updateText(output);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -95,7 +98,7 @@ public class ProfileFragment extends UpdatableFragment {
             }
         });
         try {
-            currentProfile = profiles.getJSONObject(mostRecentProfile).getJSONObject("members").getJSONObject(uuid);
+            currentProfile = profiles.getJSONObject(profile_titles.get(0).getId()).getJSONObject("members").getJSONObject(uuid);
         } catch (JSONException e) {
             e.printStackTrace();
         }
