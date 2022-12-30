@@ -13,6 +13,7 @@ import java.util.Map;
  */
 public class BazaarItem implements Comparable<BazaarItem> {
     private static final Map<String, String> nameAlias;
+
     static {
         nameAlias = new HashMap<>();
         nameAlias.put("LOG", "OAK_LOG");
@@ -37,6 +38,7 @@ public class BazaarItem implements Comparable<BazaarItem> {
     }
 
     private static final Map<String, String> categoryName;
+
     static {
         categoryName = new HashMap<>();
         categoryName.put("WHEAT", "WHEAT01");
@@ -344,7 +346,7 @@ public class BazaarItem implements Comparable<BazaarItem> {
     }
 
 
-    private final char startLetter;
+    private final String category;
     private final String name;
     private final double price;
 
@@ -362,13 +364,17 @@ public class BazaarItem implements Comparable<BazaarItem> {
             tmp_name = "";
             tmp_price = 0;
         }
-        startLetter = lookupCategory(tmp_name).charAt(0);
-        name = tmp_name;
+        category = lookupCategory(tmp_name);
+        name = tmp_name.replaceAll("ENCHANTMENT ULTIMATE ", "").replaceAll("ENCHANTMENT ", "");
         price = tmp_price;
     }
 
     public char getStartLetter() {
-        return startLetter;
+        return category.charAt(0);
+    }
+
+    public String getCategory() {
+        return category;
     }
 
     public String getName() {
@@ -378,14 +384,28 @@ public class BazaarItem implements Comparable<BazaarItem> {
     public double getPrice() {
         return price;
     }
+
     @Override
     public int compareTo(BazaarItem o) {
-        return lookupCategory(name).compareTo(lookupCategory(o.getName()));
+        return category.compareTo(o.getCategory());
     }
 
     private String lookupCategory(String itemName) {
-        String category = categoryName.get(itemName);
-        return  category != null ? category : ("_" + itemName);
+        String category = null;
+        if (itemName.startsWith("ENCHANTMENT ")) {
+            String[] splitStringArray = itemName.replaceAll("ENCHANTMENT ", "").split(" ");
+            if (splitStringArray[splitStringArray.length - 1].matches("[0-9]"))
+                splitStringArray[splitStringArray.length - 1] = "0" + splitStringArray[splitStringArray.length - 1];
+            String joinedStringArray = "";
+            for (String s : splitStringArray) {
+                if (!s.matches("ULTIMATE"))
+                    joinedStringArray += s;
+            }
+            category = joinedStringArray.replaceAll(" ", "");
+        } else {
+            category = categoryName.get(itemName);
+        }
+        return category != null ? category : ("_" + itemName);
     }
 
     @Override
